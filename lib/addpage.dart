@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 class Addpage extends StatefulWidget {
   const new({super.key});
 
@@ -12,6 +12,15 @@ class _AddpageState extends State<Addpage> {
   final agecontroller=TextEditingController();
   final classcontroller=TextEditingController();
   final addresscontroller=TextEditingController();
+
+  @override
+  void dispose(){
+    super.dispose();
+    namecontroller.dispose();
+    agecontroller.dispose();
+    classcontroller.dispose();
+    addresscontroller.dispose();
+  }
 
 
   @override
@@ -109,16 +118,22 @@ class _AddpageState extends State<Addpage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                     ElevatedButton(onPressed: (){
+                     ElevatedButton(onPressed: ()async{
                       Map<String,dynamic> student ={
                         "name":namecontroller.text,
                         "age":int.tryParse(agecontroller.text)??0,
                         "class":int.tryParse(classcontroller.text)??0,
                         "address":addresscontroller.text,
                       };
-                      Navigator.pop(context,
-                      student
-                      );
+
+                      final box=Hive.box("students");
+
+                      await box.add(student);
+
+                      if(mounted){
+                      Navigator.pop(context);
+                      
+                      }
                      },
                      
                      style:ElevatedButton.styleFrom(

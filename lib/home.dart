@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_management/addpage.dart';
 import 'package:student_management/detail.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -10,12 +10,16 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-  List<Map<String, dynamic>> students = [
-    {"name": "Jihan", "age": 19, "class": 12},
-    {"name": "Ashmil", "age": 17, "class": 12},
-    {"name": "Riswan", "age": 17, "class": 12},
-    {"name": "Jinu", "age": 19, "class": 12},
-  ];
+  // 
+  late Box studentsBox;
+
+  @override
+  void initState() {
+    super.initState();
+    studentsBox=Hive.box("students");
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,19 @@ class _HomeState extends State<Homepage> {
               ),
               SizedBox(height: 20),
               Expanded(
-                child: ListView.builder(
+                child:ValueListenableBuilder(
+                  valueListenable: studentsBox.listenable(),
+                  builder: (context,box,child){
+                    final students=box.values.toList();
+
+                    if (students.isEmpty){
+                      return Center(
+                        child: Text("No students add yet"),
+                      );
+                    }
+
+
+                     return ListView.builder(
                   itemCount: students.length,
                   itemBuilder: (context, index) {
                     final student = students[index];
@@ -54,31 +70,35 @@ class _HomeState extends State<Homepage> {
                           child: Icon(Icons.person),
                         ),
                         title: Text(student["name"]),
-                        subtitle: Text(
-                          "Age: ${student["age"]} | Class: ${student["class"]}",
-                        ),
+                        // subtitle: Text(
+                        //   "Age: ${student["age"]} | Class: ${student["class"]}",
+                        // ),
                         trailing: Icon(Icons.arrow_forward_ios),
                         onTap: (){
                           Navigator.push(context,
-                           MaterialPageRoute(builder: (context) => Detail(),),
+                           MaterialPageRoute(builder: (context) => 
+                           Detail(student: student),
+                           ),
                            );
                         },
                         
                       ),
                     );
                   },
-                ),
+                );
+                  }
+                  ),
+
+
+
+               
                 
               ),
               FloatingActionButton(onPressed: ()async{
-                final newstudent=await Navigator.push (context,
+                await Navigator.push (context,
                  MaterialPageRoute(builder: (context) => Addpage(),),
                  );
-                 if (newstudent !=null){
-                  setState(() {
-                    students.add(newstudent);
-                  });
-                 }
+                
               },
               child: Icon(Icons.add),
               ),

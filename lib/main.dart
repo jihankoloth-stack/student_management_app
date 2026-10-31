@@ -1,9 +1,15 @@
 
 import 'package:flutter/material.dart';
-import 'package:student_management/addpage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:student_management/home.dart';
 
-void main(){
+void main()async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+
+  await Hive.openBox("students");
+
   runApp(Studentapp());
 }
 class Studentapp extends StatelessWidget {
