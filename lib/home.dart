@@ -67,7 +67,9 @@ class _HomeState extends State<Homepage> {
                             // subtitle: Text(
                             //   "Age: ${student["age"]} | Class: ${student["class"]}",
                             // ),
-                            trailing: Icon(Icons.arrow_forward_ios),
+                            trailing: Icon(Icons.arrow_forward_ios,
+                            size: 17,
+                            ),
                             onTap: () {
                               Navigator.push(
                                 context,

@@ -127,9 +127,9 @@ class _AddpageState extends State<Addpage> {
                       };
 
                       final box=Hive.box("students");
-
+                       
                       await box.add(student);
-
+ 
                       if(mounted){
                       Navigator.pop(context);
                       
