@@ -11,7 +11,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-  //
+  
   late Box studentsBox;
 
   @override
@@ -32,7 +32,8 @@ class _HomeState extends State<Homepage> {
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
-                    child: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+                    child: IconButton(onPressed: () {},
+                     icon: Icon(Icons.home)),
                   ),
                 ],
               ),
