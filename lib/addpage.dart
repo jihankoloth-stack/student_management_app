@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 class Addpage extends StatefulWidget {
   final dynamic student;
-  final dynamic studentkey;
 
   const Addpage({super.key,
-  this.student,
-  this.studentkey,});
+  this.student,});
 
   @override
   State<Addpage> createState() => _AddpageState();
@@ -18,19 +16,7 @@ class _AddpageState extends State<Addpage> {
   final classcontroller=TextEditingController();
   final addresscontroller=TextEditingController();
 
-  @override
-  void initState(){
-    super.initState();
-    if (widget.student !=null){
-      namecontroller.text=widget.student!["name"].toString();
-      agecontroller.text=widget.student!["age"].toString();
-      classcontroller.text=widget.student!["class"].toString();
-      addresscontroller.text=widget.student!["address"]?.toString()??"";
-      
-
-    }
-  }
-
+ 
 
   @override
   void dispose(){

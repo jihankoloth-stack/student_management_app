@@ -17,7 +17,8 @@ class _HomeState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    studentsBox = Hive.box("students");
+    studentsBox= Hive.box("students");
+
   }
 
   @override
@@ -44,17 +45,20 @@ class _HomeState extends State<Homepage> {
               SizedBox(height: 20),
               Expanded(
                 child: ValueListenableBuilder(
-                  valueListenable: studentsBox.listenable(),
-                  builder: (context, box, child) {
+                  valueListenable: studentsBox.listenable(), 
+                  builder: (context,box,child) {
                     final students = box.values.toList();
 
-                    if (students.isEmpty) {
-                      return Center(child: Text("No students add yet"));
-                    }
+                    if (students.isEmpty){
+                      return Center(
+                        child: Text("not student add yet"),
 
+
+                      );
+                    }
                     return ListView.builder(
-                      itemCount: students.length,
-                      itemBuilder: (context, index) {
+                      itemCount:students.length ,
+                      itemBuilder: (context,index){
                         final student = students[index];
 
                         return Card(
@@ -62,30 +66,28 @@ class _HomeState extends State<Homepage> {
                           elevation: 3,
 
                           child: ListTile(
-                            leading: CircleAvatar(child: Icon(Icons.person)),
                             title: Text(student["name"]),
-                            // subtitle: Text(
-                            //   "Age: ${student["age"]} | Class: ${student["class"]}",
-                            // ),
-                            trailing: Icon(Icons.arrow_forward_ios,
-                            size: 1,
+                            leading: CircleAvatar(
+                              child: Icon(Icons.person),
                             ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      Detail(student: student,
-                                      ),
-                                ),
-                              );
+                            trailing: Icon(Icons.arrow_forward_ios,
+                            size: 17,
+                            ),
+                            onTap: (){
+                            Navigator.push(context, 
+                            MaterialPageRoute(
+                              builder:(context)=>Detail(student: student,)
+                              ),
+                            );
+
                             },
                           ),
                         );
-                      },
+                         
+                      }
                     );
-                  },
-                ),
+                  }
+                  ),
               ),
               FloatingActionButton(
                 onPressed: () async {

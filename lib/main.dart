@@ -3,13 +3,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:student_management/home.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  
+WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
+await Hive.initFlutter();
 
-
-  await Hive.openBox("students");
-
+await Hive.openBox("students");
 
   runApp(Studentapp());
 }
