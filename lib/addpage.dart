@@ -144,15 +144,8 @@ class _AddpageState extends State<Addpage> {
                         "class":int.tryParse(classcontroller.text)??0,
                         "address":addresscontroller.text,
                       };
-
-                      final box=Hive.box("students");
-                      if (widget.studentkey !=null){
-                        await box.put(widget.studentkey, student);
-                      }else{
-                          
-                          await box.add(student);
-                      }
-                       
+                       final box =Hive.box("students");
+                       await box.add(student);
  
                       if(mounted){
                       Navigator.pop(context);
@@ -167,8 +160,7 @@ class _AddpageState extends State<Addpage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                      )  ,
-                     child: Text(widget.student==null
-                     ?"Add Student":"Update Student",
+                     child: Text("Add Student",
                      ) 
                      ),
                     ]
