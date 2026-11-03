@@ -47,6 +47,7 @@ class _HomeState extends State<Homepage> {
                   valueListenable: studentsBox.listenable(),
                   builder: (context, box, child) {
                     final students = box.values.toList();
+                    final keys =box.keys.toList();
 
                     if (students.isEmpty) {
                       return Center(child: Text("No students add yet"));
@@ -56,6 +57,7 @@ class _HomeState extends State<Homepage> {
                       itemCount: students.length,
                       itemBuilder: (context, index) {
                         final student = students[index];
+                        final studentkey =keys[index];
 
                         return Card(
                           margin: EdgeInsets.all(10),
@@ -68,14 +70,16 @@ class _HomeState extends State<Homepage> {
                             //   "Age: ${student["age"]} | Class: ${student["class"]}",
                             // ),
                             trailing: Icon(Icons.arrow_forward_ios,
-                            size: 17,
+                            size: 1,
                             ),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      Detail(student: student),
+                                      Detail(student: student,
+                                      studentkey:studentkey,
+                                      ),
                                 ),
                               );
                             },

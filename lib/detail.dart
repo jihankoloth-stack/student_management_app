@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:student_management/addpage.dart';
 import 'package:student_management/home.dart';
 
 class Detail extends StatefulWidget {
+  dynamic studentkey;
   dynamic student;
-  new({super.key, required this.student});
+  Detail({super.key, required this.student, required this.studentkey});
 
   @override
   State<Detail> createState() => _DetailState();
 }
 
 class _DetailState extends State<Detail> {
+  late Map<String,dynamic>student;
+ 
+ @override
+ void initState() {
+    super.initState();
+    student=widget.student;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +85,28 @@ class _DetailState extends State<Detail> {
                   subtitle: Text("${widget.student["address"]}"),
                 ),
               ),
+              SizedBox(height: 20,),
+              ElevatedButton(onPressed: ()async{
+                await Navigator.push(context,
+                 MaterialPageRoute(
+                  builder: (context)=>Addpage(
+                    student: student,
+                    studentkey: widget.studentkey,
+                  )
+                  ),
+                  );
+                  final box=Hive.box("student");
+                  if(!mounted)return;
+                  final updateStudent =box.get(widget.studentkey);
+
+                  if(updateStudent !=null){
+                    setState(() {
+                     student= updateStudent;
+                    });
+                  }
+              },
+               child: Text("edit"),
+               ),
             ],
           ),
         ),
