@@ -2,19 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 class Addpage extends StatefulWidget {
   final dynamic student;
+  final dynamic studentkey;
 
-  const Addpage({super.key,
-  this.student,});
+  const Addpage({super.key,this.student,this.studentkey, studentKey});
 
   @override
   State<Addpage> createState() => _AddpageState();
 }
 
 class _AddpageState extends State<Addpage> {
+
+@override
+  void initState() {
+    super.initState();
+    if (widget.student !=null){
+      namecontroller.text=widget.student ! ["name"];
+      agecontroller.text=widget.student ! ["age"].toString();
+      classcontroller.text=widget.student ! ["class"].toString();
+      addresscontroller.text=widget.student ! ["address"]?.toString()??"";
+
+    }
+  }
+
   final namecontroller=TextEditingController();
   final agecontroller=TextEditingController();
   final classcontroller=TextEditingController();
   final addresscontroller=TextEditingController();
+
+
 
  
 
@@ -124,14 +139,19 @@ class _AddpageState extends State<Addpage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                      ElevatedButton(onPressed: ()async{
-                      Map<String,dynamic> student ={
+                      Map<String,dynamic>student={
                         "name":namecontroller.text,
-                        "age":int.tryParse(agecontroller.text)??0,
+                        "age": int.tryParse(agecontroller.text)??0,
                         "class":int.tryParse(classcontroller.text)??0,
                         "address":addresscontroller.text,
                       };
-                       final box =Hive.box("students");
-                       await box.add(student);
+                    
+                      final box= Hive.box("students");
+                      if (widget.studentkey !=null){
+                        await box.put(widget.studentkey, student);
+                      }else{
+                        await box.add(student);
+                      }
  
                       if(mounted){
                       Navigator.pop(context);
@@ -146,9 +166,10 @@ class _AddpageState extends State<Addpage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                      )  ,
-                     child: Text("Add Student",
+                     child: Text(widget.student == null ? "add student":"update student",
                      ) 
                      ),
+                     
                     ]
                     
                   )

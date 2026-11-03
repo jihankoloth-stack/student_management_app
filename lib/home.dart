@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:student_management/addpage.dart';
 import 'package:student_management/detail.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<Homepage> createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Homepage> {
+class _HomeState extends State<Home> {
   
   late Box studentsBox;
 
   @override
   void initState() {
     super.initState();
-    studentsBox= Hive.box("students");
-
+    studentsBox = Hive.box('students');
   }
 
   @override
@@ -33,65 +34,66 @@ class _HomeState extends State<Homepage> {
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
-                    child: IconButton(onPressed: () {},
-                     icon: Icon(Icons.home)),
+                    child: IconButton(onPressed: () {}, icon: Icon(Icons.home)),
                   ),
                 ],
               ),
+
               Text(
                 "Student management",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
               Expanded(
                 child: ValueListenableBuilder(
-                  valueListenable: studentsBox.listenable(), 
-                  builder: (context,box,child) {
+                  valueListenable: studentsBox.listenable(),
+                  builder: (context, box, child) {
                     final students = box.values.toList();
+                    final studentkeys = box.keys.toList();
 
-                    if (students.isEmpty){
-                      return Center(
-                        child: Text("not student add yet"),
-
-
-                      );
+                    if (students.isEmpty) {
+                      return Center(child: Text("No students added yet"));
                     }
+
                     return ListView.builder(
-                      itemCount:students.length ,
-                      itemBuilder: (context,index){
+                      itemCount: students.length,
+                      itemBuilder: (context, index) {
                         final student = students[index];
+                        final studentKey = studentkeys[index];
 
                         return Card(
                           margin: EdgeInsets.all(10),
-                          elevation: 3,
+                          elevation: 4,
 
                           child: ListTile(
-                            title: Text(student["name"]),
-                            leading: CircleAvatar(
-                              child: Icon(Icons.person),
-                            ),
-                            trailing: Icon(Icons.arrow_forward_ios,
-                            size: 17,
-                            ),
-                            onTap: (){
-                            Navigator.push(context, 
-                            MaterialPageRoute(
-                              builder:(context)=>Detail(student: student,)
-                              ),
-                            );
-
+                            leading: CircleAvatar(child: Icon(Icons.person)),
+                            title: Text(student["name"].toString()),
+                            // subtitle: Text(
+                            //   "age: ${student["age"]} | class: ${student["class"]} ",
+                            // ),
+                            trailing: Icon(Icons.arrow_forward_ios),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Details(
+                                    student: student,
+                                    studentKey: studentKey,
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         );
-                         
-                      }
+                      },
                     );
-                  }
-                  ),
+                  },
+                ),
               ),
+
               FloatingActionButton(
-                onPressed: () async {
-                  await Navigator.push(
+                onPressed: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Addpage()),
                   );
