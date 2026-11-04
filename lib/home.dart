@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:student_management/addpage.dart';
 import 'package:student_management/detail.dart';
 
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -11,10 +10,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-
 class _HomeState extends State<Home> {
-  
-  
   late Box studentsBox;
 
   @override
