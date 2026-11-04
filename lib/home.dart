@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:student_management/addpage.dart';
 import 'package:student_management/detail.dart';

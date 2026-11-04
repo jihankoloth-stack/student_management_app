@@ -4,7 +4,7 @@ class Addpage extends StatefulWidget {
   final dynamic student;
   final dynamic studentkey;
 
-  const Addpage({super.key,this.student,this.studentkey, studentKey});
+  const Addpage({super.key,this.student,this.studentkey,});
 
   @override
   State<Addpage> createState() => _AddpageState();

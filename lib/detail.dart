@@ -99,7 +99,7 @@ class _DetailsState extends State<Details> {
                     MaterialPageRoute(
                       builder: (context) => Addpage(
                         student: widget.student,
-                        studentKey: widget.studentKey,
+                        studentkey: widget.studentKey,
                       ),
                     ),
                   );
