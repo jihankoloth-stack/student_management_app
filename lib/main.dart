@@ -13,8 +13,12 @@ await Hive.openBox("students");
   runApp(Studentapp());
 }
  
+
+
 class Studentapp extends StatelessWidget {
   const Studentapp({super.key});
+
+
 
 
   @override

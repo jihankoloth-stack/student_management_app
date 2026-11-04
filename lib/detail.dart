@@ -19,7 +19,10 @@ class _DetailsState extends State<Details> {
   void initState() {
     super.initState();
     student = widget.student;
+
+
   }
+
 
   @override
   Widget build(BuildContext context) {
