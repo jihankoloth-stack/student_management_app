@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:student_management/addpage.dart';
 import 'package:student_management/home.dart';
@@ -110,7 +109,6 @@ class _DetailsState extends State<Details> {
                     setState(() {
                       student = updatedStudent;
                     });
-                    
                   }
                 },
                 child: Text('Edit'),

@@ -30,9 +30,6 @@ class _AddpageState extends State<Addpage> {
   final addresscontroller=TextEditingController();
 
 
-
- 
-
   @override
   void dispose(){
     super.dispose();
@@ -147,6 +144,7 @@ class _AddpageState extends State<Addpage> {
                       };
                     
                       final box= Hive.box("students");
+
                       if (widget.studentkey !=null){
                         await box.put(widget.studentkey, student);
                       }else{
