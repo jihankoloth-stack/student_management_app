@@ -134,13 +134,19 @@ class _AddpageState extends State<Addpage> {
                                 final box = Hive.box("students");
 
                                 if (widget.studentkey != null) {
+
                                   await box.put(widget.studentkey, student);
                                 } else {
+
                                   await box.add(student);
+                                  
                                 }
 
+
                                 if (mounted) {
+
                                   Navigator.pop(context);
+
                                 }
                               },
 
