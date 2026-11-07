@@ -150,18 +150,21 @@ class _AddpageState extends State<Addpage> {
                               },
 
                               style: ElevatedButton.styleFrom(
+
                                 elevation: 3,
                                 foregroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
+
                                 ),
+                                
                               ),
                               child: Text(
 
                                 widget.student == null
                                     ? "add student"
                                     : "update student",
-                                    
+
                               ),
                             ),
                           ],
