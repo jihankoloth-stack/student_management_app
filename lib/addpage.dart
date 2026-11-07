@@ -101,12 +101,15 @@ class _AddpageState extends State<Addpage> {
                             ),
                           ),
                         ),
+                        
                         SizedBox(height: 10),
+
                         Text(
                           "Address",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextField(
+
                           controller: addresscontroller,
                           maxLines: 3,
                           decoration: InputDecoration(
@@ -157,7 +160,7 @@ class _AddpageState extends State<Addpage> {
                                   borderRadius: BorderRadius.circular(10),
 
                                 ),
-                                
+
                               ),
                               child: Text(
 
