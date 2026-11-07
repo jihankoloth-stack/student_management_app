@@ -139,9 +139,8 @@ class _AddpageState extends State<Addpage> {
                                 } else {
 
                                   await box.add(student);
-                                  
-                                }
 
+                                }
 
                                 if (mounted) {
 
@@ -158,9 +157,11 @@ class _AddpageState extends State<Addpage> {
                                 ),
                               ),
                               child: Text(
+
                                 widget.student == null
                                     ? "add student"
                                     : "update student",
+                                    
                               ),
                             ),
                           ],
