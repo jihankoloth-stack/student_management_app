@@ -13,14 +13,13 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  
   late final student;
 
   @override
   void initState() {
     super.initState();
     student = widget.student;
-
-
   }
 
 
