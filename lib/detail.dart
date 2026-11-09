@@ -3,6 +3,7 @@ import 'package:student_management/addpage.dart';
 import 'package:student_management/home.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+
 class Details extends StatefulWidget {
   final dynamic student;
   final dynamic studentKey;
@@ -13,7 +14,7 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  
+
   late final student;
 
   @override
