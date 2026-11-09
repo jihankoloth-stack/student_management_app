@@ -11,12 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
   late Box studentsBox;
 
   @override
   void initState() {
     super.initState();
     studentsBox = Hive.box('students');
+
   }
 
   @override
